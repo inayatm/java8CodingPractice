@@ -16,15 +16,14 @@ public class GroupingByProperty {
                 new Person("David", 30)
         );
 
-        Map<Integer, List<Person>> listMap = people.stream()
-                .collect(Collectors.groupingBy(Person::getAge));
+        Map<Integer, List<Person>> sameageMap = people.stream().collect(Collectors.groupingBy(Person::getAge));
+        List<List<Person>> sameagePeopleList = sameageMap.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
 
-        System.out.println(listMap);
-       List personWithSameAge=listMap.entrySet()
-                .stream()
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toList());
-       System.out.println(personWithSameAge);
+        System.out.println(sameagePeopleList);
+
+        sameagePeopleList.forEach(person->person.forEach(p-> System.out.println(p.getName())));
+
+
 
     }
 
@@ -51,3 +50,5 @@ class Person {
         return this.name;
     }
 }
+
+
